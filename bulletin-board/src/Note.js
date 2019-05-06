@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaTrash from 'react-icons/lib/fa/trash'
 import FaFloppyO from 'react-icons/lib/fa/floppy-o'
@@ -10,24 +10,32 @@ class Note extends Component {
 			editing: false
 		}
 		this.edit = this.edit.bind(this)
-		this.remove = this.remove.bind(this)
 		this.save = this.save.bind(this)
+		this.remove = this.remove.bind(this)
 		this.renderForm = this.renderForm.bind(this)
-		this.renderDisplay = this.renderDisplay.bind(this)
+		this.renderDisplay = this.renderDisplay.bind(this)	
 	}
+
 	edit() {
 		this.setState({
 			editing: true
 		})
 	}
-
 	remove() {
-		alert('removing note')
+		this.props.onRemove(this.props.index)
 	}
 
-	save() {
-		alert(this._newText.value)
+	save(e) {
+		e.preventDefault()
+		this.props.onChange(this._newText.value,this.props.index)
+		this.setState({
+        editing : false
+		})
+		
 	}
+	
+
+
 
 	renderForm() {
 		return (
@@ -51,6 +59,7 @@ class Note extends Component {
 			</div>
 		)
 	}
+
 	render() {
 		return this.state.editing ? this.renderForm() : this.renderDisplay()
 	}
