@@ -13,6 +13,16 @@ class Board extends Component{
         this.remove = this.remove.bind(this)
 		this.nextId = this.nextId.bind(this)
     }
+    componentWillMount(){
+        var self = this
+        if(this.props.count){
+            fetch('https://baconipsum.com/api?type=all-meat&sentences=$(this.props.count)')
+            .then(Response => Response.json)
+            .then(json => json[0]
+                        .split('. ')
+                        .foreach(sentence =>self.add(sentence.substring(0,25))))
+        }
+    }
     add(text){
     this.setState(prevState =>({
       notes : [

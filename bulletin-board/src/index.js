@@ -5,7 +5,7 @@ import './index.css';
 //import Note from './Note';
 import Board from './Board'
 import * as registerServiceWorker from './registerServiceWorker';
-ReactDOM.render(<Board />, document.getElementById('root'))
+ReactDOM.render(<Board count={50}/>, document.getElementById('root'))
 registerServiceWorker.unregister();
 
 //ReactDOM.render(<Note />, document.getElementById('root'));
